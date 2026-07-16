@@ -8,10 +8,32 @@
 })(window,document,'script','dataLayer','GTM-PKQRKQNF');</script>
 <!-- End Google Tag Manager -->
 </head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PKQRKQNF"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <label for="value-input">Price</label>
-<input id="value-input">
-<button>Buy</button>
+<input id="value-input" type="number" step="0.01" placeholder="10.00">
+<button id="buy-button">Buy</button>
+
+<script>
+  document.getElementById('buy-button').addEventListener('click', function() {
+    var price = document.getElementById('value-input').value;
+    
+    // Replicate what a backend or frontend framework would do
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      'event': 'manual_purchase', // Custom event name
+      'purchase_value': price,    // The dynamic price
+      'currency': 'USD',
+      'transaction_id': 'T_' + new Date().getTime() // Unique fake transaction ID
+    });
+    
+    console.log('DataLayer updated with purchase!');
+    alert('Purchased for $' + price);
+  });
+</script>
 </body>
 </html>
-
