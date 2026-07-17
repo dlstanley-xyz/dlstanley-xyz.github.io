@@ -1,0 +1,62 @@
+<html>
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PKQRKQNF');</script>
+<!-- End Google Tag Manager -->
+<style>
+  .error { color: red; display: none; }
+  .success { color: green; display: none; }
+</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PKQRKQNF"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager -->
+
+<h2>Newsletter Signup (Validation Demo)</h2>
+<p>This page demonstrates a form with validation. Clicking 'Submit' doesn't always mean success.</p>
+
+<form id="signup-form">
+  <label for="email-input">Email:</label>
+  <input id="email-input" type="email" placeholder="you@example.com" required>
+  <button type="submit" id="submit-btn">Subscribe</button>
+</form>
+
+<div id="error-msg" class="error">Please enter a valid email address.</div>
+<div id="success-msg" class="success">Thank you for subscribing!</div>
+
+<script>
+  document.getElementById('signup-form').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent actual page reload for demo
+    
+    var emailInput = document.getElementById('email-input');
+    var errorMsg = document.getElementById('error-msg');
+    var successMsg = document.getElementById('success-msg');
+    
+    // Simple validation
+    if (emailInput.checkValidity()) {
+      errorMsg.style.display = 'none';
+      successMsg.style.display = 'block';
+      
+      // Best Practice: Push custom success event
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        'event': 'signup_success',
+        'email_domain': emailInput.value.split('@')[1]
+      });
+      
+      console.log('Form submitted successfully!');
+    } else {
+      errorMsg.style.display = 'block';
+      successMsg.style.display = 'none';
+      console.log('Form submission failed validation.');
+    }
+  });
+</script>
+</body>
+</html>
